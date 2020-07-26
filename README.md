@@ -6,7 +6,6 @@ This page hosts important notes and notebooks for reference and public viewing. 
 
 * [**Machine Learning**](MachineLearning/Introduction.md)   
 
-## Machine Learning 
 
 
 ## Reference material 
