@@ -5,10 +5,8 @@ The first question I get in my mind after hearing the word "Machine Learning" is
 Machine Learning is mainly about extracing information or knowledge from data. This knowledge can then be 
 used to perform various tasks, one common use case is decision making, or I can say automating the decision making. 
 
-```ruby
-# ┌──────────---------------------------------------------------------------------------------------------------------------------──┐
-# | Machine Learning is mainly about extracing information or knowledge from data. This knowledge can then be                       |
-# | used to perform various tasks, one common use case is decision making, or I can say automating the decision making.             |
-# |                                                                                                                                 |
-# └─────────---------------------------------------------------------------------------------------------------------------------───┘
-```
+#### ┌──────────---------------------------------------------------------------------------------------------------------------------──┐
+#### | Machine Learning is mainly about extracing information or knowledge from data. This knowledge can then be                       |
+#### | used to perform various tasks, one common use case is decision making, or I can say automating the decision making.             |
+#### |                                                                                                                                 |
+#### └─────────---------------------------------------------------------------------------------------------------------------------───┘
