@@ -12,6 +12,9 @@ This page hosts important notes and notebooks for reference and public viewing. 
 
 I am still learning this, so the default README.md is kept here for reference untill I am pro in using it. 
 
+other useful totorial 
+
+http://jmcglone.com/guides/github-pages/
 
 
 You can use the [editor on GitHub](https://github.com/ramankhurana/ramankhurana.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
