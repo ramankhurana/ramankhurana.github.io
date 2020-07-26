@@ -1,4 +1,19 @@
-## Welcome to GitHub Pages
+## Welcome to my github pages 
+
+This page hosts important notes and notebooks for reference and public viewing. Following are some of the topic of my interest. You can read more about them by clicking on the respective link.  
+
+# Table of Contents
+
+* [**Machine Learning**](MachineLearning/Introduction.md)   
+
+## Machine Learning 
+
+
+## Reference material 
+
+I am still learning this, so the default README.md is kept here for reference untill I am pro in using it. 
+
+
 
 You can use the [editor on GitHub](https://github.com/ramankhurana/ramankhurana.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
