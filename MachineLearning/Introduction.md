@@ -12,5 +12,10 @@ It is a research field which lies at the intersection of three research areas:
 2. computer science 
 3. artificial intelligence 
 
+The presence of its application is visible in daily life from past few years, automating face detection and tagging on facebook, 
+automatic product recomendation on google, movie recomendation on netflix and translate the language by google translator are a  
+few to name them. They all have made the life of human much easier and most of them have multiple machine learning models running 
+behind the scene to serve the outcome we see as an end user. 
+
 
 
