@@ -6,9 +6,9 @@ Machine Learning is mainly about extracing information or knowledge from data. T
 used to perform various tasks, one common use case is decision making, or I can say automating the decision making. 
 
 ```ruby
-print TTY::Box.frame { "Hello world!" }
-# =>
-# ┌────────────┐
-# │Hello world!│
-# └────────────┘
+# ┌──────────---------------------------------------------------------------------------------------------------------------------──┐
+# | Machine Learning is mainly about extracing information or knowledge from data. This knowledge can then be                       |
+# | used to perform various tasks, one common use case is decision making, or I can say automating the decision making.             |
+# |                                                                                                                                 |
+# └─────────---------------------------------------------------------------------------------------------------------------------───┘
 ```
