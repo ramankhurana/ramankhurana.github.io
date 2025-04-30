@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dr. Raman Khurana | AI Scientist & Educator</title>
+  <title>Dr. Raman Khurana | ML Researcher at Northwestern</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,25 +15,47 @@
       background: linear-gradient(135deg, #12372A, #436850);
       color: #fff;
       padding: 3rem 1rem;
-      text-align: center;
-      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      text-align: left;
+    }
+    .hero-text {
+      max-width: 500px;
     }
     header img {
-      width: 140px;
-      aspect-ratio: 1 / 0.9;
+      width: 160px;
+      aspect-ratio: 1 / 1;
       object-fit: cover;
       border-radius: 50%;
       border: 4px solid white;
-      margin-top: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
     header h1 {
-      margin: 1rem 0 0.2rem;
-      font-size: 2.2rem;
+      margin: 0.5rem 0 0.2rem;
+      font-size: 2.4rem;
     }
     header p {
-      margin: 0.2rem;
+      margin: 0.2rem 0;
       font-weight: 300;
       font-size: 1.1rem;
+    }
+    .connect-button {
+      margin-top: 1rem;
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background-color: #2D9596;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .connect-button:hover {
+      background-color: #227a7b;
     }
     nav {
       background: #ECECEC;
@@ -76,10 +97,14 @@
 </head>
 <body>
   <header>
-    <img src="IMG_0844.jpg" alt="Dr. Raman Khurana">
-    <h1>Dr. Raman Khurana</h1>
-    <p>Machine Learning Scientist | Educator | Researcher</p>
-    <p>Illinois, USA | <a href="mailto:ramankhurana1986@gmail.com">Email</a> | <a href="https://github.com/ramankhurana">GitHub</a></p>
+    <img src="a699c982-2f43-4aaf-8f38-fd260a52b237.png" alt="Dr. Raman Khurana">
+    <div class="hero-text">
+      <h1>Dr. Raman Khurana</h1>
+      <p>Machine Learning Researcher | Educator | Computational Physicist</p>
+      <p>Working at <strong>Northwestern University</strong></p>
+      <p>Illinois, USA | <a href="mailto:ramankhurana1986@gmail.com">Email</a> | <a href="https://github.com/ramankhurana">GitHub</a> | <a href="https://www.linkedin.com/in/dr-raman-khurana-21b4497a/">LinkedIn</a></p>
+      <a class="connect-button" href="https://www.linkedin.com/in/dr-raman-khurana-21b4497a/" target="_blank">Let's Connect</a>
+    </div>
   </header>
 
   <nav>
