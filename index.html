@@ -83,6 +83,7 @@
     .project, .experience {
       margin-bottom: 2rem;
     }
+    
     footer {
       text-align: center;
       padding: 1.5rem;
@@ -93,6 +94,38 @@
     a {
       color: #2D9596;
     }
+
+
+
+
+
+    /* Blinking / pulsing opportunity text */
+.blinking-opportunity {
+  margin-top: 0.8rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #FFD966; /* warm highlight, readable on dark header */
+  animation: pulse 1.8s infinite;
+}
+
+.blinking-opportunity span {
+  color: #E0F2F1; /* soft contrast, not harsh */
+}
+
+/* Subtle academic pulse (not aggressive blink) */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+    
   </style>
 </head>
 <body>
@@ -100,9 +133,19 @@
     <img src="IMG_0844.jpg" alt="Dr. Raman Khurana">
     <div class="hero-text">
       <h1>Dr. Raman Khurana</h1>
-      <p>Machine Learning Researcher | Educator | Computational Physicist</p>
+      <p>Staff Researcher | Lecturer | Computational Physicist </p>
       <p> <strong>Northwestern University</strong></p>
       <p>Illinois, USA</p>
+
+      <!-- Blinking opportunity text -->
+      <p class="blinking-opportunity">
+      🚀 Open for opportunities at the intersection of
+      <span>Experimental High Energy Physics</span>,
+      <span>Machine Learning & Data Science</span>,
+      <span>Foundation Models</span>,
+      <span>Quantum Computing</span>
+    </p>
+      
       <p>
         <a href="mailto:ramankhurana1986@gmail.com">Email</a> |
         <a href="https://github.com/ramankhurana">GitHub</a> |
@@ -113,8 +156,12 @@
 
   <nav>
     <a href="#about">About</a>
-    <a href="#projects">Projects</a>
+    <a href="#interest">Research Interests</a>
+    <a href="#research">Research Projects</a>
+    <a href="#projects">Engineering Projects</a>
     <a href="#experience">Experience</a>
+    <a href="#publications">Selected Publications</a>
+    <a href="#publications">Selected Publications</a>
     <a href="#education">Education</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -124,11 +171,12 @@
     <p>Hi! I’m Machine Learning Researcher at Department of Electrical and Computer Engineering at Northwestern University. </p> 
     <p>My current research focuses on quantum computing, quantum machine learning, time series forecasting, development and security of LLM applications. 
 
-    <p> I received Breakthrough Price in Physics 2025 "Oscar of Science" for the unprecedent contribution towards the discovery and measurement of Higgs boson</p>
+    <p> I received Breakthrough Price in Physics 2025 "Oscar of Science" for the unprecedent contribution towards the discovery and measurement of Higgs boson properties. </p>
     <p> I was awarded with Ramanujan fellowship by SERB to conduct the search for dark matter and enhancing the discovery potential using advanced machine learning. </p>
     
-      
-    <p> My research interests are in the domain of AI and Quantum Computing. I see tremendous potential in two way communication between these two fields to achieve long term goals.  </p>
+    <section id="interest">
+    <p> My research interests lie at the intersection of Artificial Intelligence and Quantum Computing. I believe there is significant potential for synergy between these two fields to achieve long-term technological goals.  </p>
+    
     
     sequence modeling, with strong emphasis on time series forecasting and the interpretability of large language models. I am particularly interested in:</p>
     <ul>
