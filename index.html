@@ -1103,16 +1103,16 @@
       /* ── outer sphere ring ── */
       qx.beginPath();
       qx.arc(cx, cy, R, 0, Math.PI * 2);
-      qx.strokeStyle = 'rgba(45,212,191,0.10)';
-      qx.lineWidth = 1;
+      qx.strokeStyle = 'rgba(45,212,191,0.35)';
+      qx.lineWidth = 1.5;
       qx.stroke();
 
       /* ── equatorial ellipse (horizontal great circle) ── */
       qx.beginPath();
       qx.ellipse(cx, cy, R, R * 0.28, 0, 0, Math.PI * 2);
-      qx.strokeStyle = 'rgba(45,212,191,0.11)';
-      qx.lineWidth = 1;
-      qx.setLineDash([3, 5]);
+      qx.strokeStyle = 'rgba(45,212,191,0.30)';
+      qx.lineWidth = 1.2;
+      qx.setLineDash([4, 5]);
       qx.stroke();
       qx.setLineDash([]);
 
@@ -1122,9 +1122,9 @@
       qx.rotate(Math.PI * 0.19);
       qx.beginPath();
       qx.ellipse(0, 0, R * 0.28, R, 0, 0, Math.PI * 2);
-      qx.strokeStyle = 'rgba(167,139,250,0.10)';
-      qx.lineWidth = 1;
-      qx.setLineDash([3, 5]);
+      qx.strokeStyle = 'rgba(167,139,250,0.30)';
+      qx.lineWidth = 1.2;
+      qx.setLineDash([4, 5]);
       qx.stroke();
       qx.setLineDash([]);
       qx.restore();
@@ -1135,56 +1135,55 @@
       qx.rotate(-Math.PI * 0.19);
       qx.beginPath();
       qx.ellipse(0, 0, R * 0.28, R, 0, 0, Math.PI * 2);
-      qx.strokeStyle = 'rgba(251,191,36,0.09)';
-      qx.lineWidth = 1;
-      qx.setLineDash([3, 5]);
+      qx.strokeStyle = 'rgba(251,191,36,0.25)';
+      qx.lineWidth = 1.2;
+      qx.setLineDash([4, 5]);
       qx.stroke();
       qx.setLineDash([]);
       qx.restore();
 
       /* ── pole labels |0⟩ / |1⟩ ── */
-      qx.font = '600 11px Inter, sans-serif';
+      qx.font = '700 12px Inter, sans-serif';
       qx.textAlign = 'center';
-      qx.fillStyle = 'rgba(45,212,191,0.30)';
-      qx.fillText('|0⟩', cx, cy - R - 8);
-      qx.fillStyle = 'rgba(45,212,191,0.20)';
-      qx.fillText('|1⟩', cx, cy + R + 16);
+      qx.fillStyle = 'rgba(45,212,191,0.70)';
+      qx.fillText('|0⟩', cx, cy - R - 10);
+      qx.fillStyle = 'rgba(45,212,191,0.50)';
+      qx.fillText('|1⟩', cx, cy + R + 18);
 
       /* ── precessing state vector |ψ⟩ ── */
-      const theta = 0.72;                          /* polar angle  */
-      const phi   = qt * 0.55;                     /* azimuth (time) */
-      /* project 3-D point on sphere surface onto 2-D canvas */
+      const theta = 0.72;
+      const phi   = qt * 0.55;
       const vx    = R * Math.sin(theta) * Math.cos(phi);
-      const vy    = -R * Math.cos(theta);          /* y flipped */
-      const vz    = R * Math.sin(theta) * Math.sin(phi); /* depth */
-      const alpha = 0.18 + 0.18 * ((vz / R + 1) / 2);   /* depth fade */
+      const vy    = -R * Math.cos(theta);
+      const vz    = R * Math.sin(theta) * Math.sin(phi);
+      const alpha = 0.45 + 0.35 * ((vz / R + 1) / 2);   /* brighter depth fade */
 
       /* vector line */
       qx.beginPath();
       qx.moveTo(cx, cy);
       qx.lineTo(cx + vx, cy + vy);
-      qx.strokeStyle = `rgba(45,212,191,${alpha * 2.2})`;
-      qx.lineWidth   = 1.6;
+      qx.strokeStyle = `rgba(45,212,191,${alpha})`;
+      qx.lineWidth   = 2;
       qx.stroke();
 
       /* arrowhead */
       const ang = Math.atan2(vy, vx);
-      const al  = 8;
+      const al  = 9;
       qx.beginPath();
       qx.moveTo(cx + vx, cy + vy);
       qx.lineTo(cx + vx - al * Math.cos(ang - 0.42), cy + vy - al * Math.sin(ang - 0.42));
       qx.lineTo(cx + vx - al * Math.cos(ang + 0.42), cy + vy - al * Math.sin(ang + 0.42));
       qx.closePath();
-      qx.fillStyle = `rgba(45,212,191,${alpha * 2.5})`;
+      qx.fillStyle = `rgba(45,212,191,${alpha})`;
       qx.fill();
 
       /* glowing tip */
-      const grd = qx.createRadialGradient(cx+vx, cy+vy, 0, cx+vx, cy+vy, 10);
-      grd.addColorStop(0, `rgba(45,212,191,${alpha * 2.0})`);
+      const grd = qx.createRadialGradient(cx+vx, cy+vy, 0, cx+vx, cy+vy, 14);
+      grd.addColorStop(0, `rgba(45,212,191,${alpha * 0.9})`);
       grd.addColorStop(1, 'rgba(45,212,191,0)');
       qx.fillStyle = grd;
       qx.beginPath();
-      qx.arc(cx + vx, cy + vy, 10, 0, Math.PI * 2);
+      qx.arc(cx + vx, cy + vy, 14, 0, Math.PI * 2);
       qx.fill();
 
       /* ── second vector (entangled qubit, hep colour) ── */
@@ -1192,20 +1191,20 @@
       const vx2  = R * 0.6 * Math.sin(theta + 0.6) * Math.cos(phi2);
       const vy2  = -R * 0.6 * Math.cos(theta + 0.6);
       const vz2  = R * 0.6 * Math.sin(theta + 0.6) * Math.sin(phi2);
-      const a2   = 0.10 + 0.10 * ((vz2 / (R * 0.6) + 1) / 2);
+      const a2   = 0.30 + 0.25 * ((vz2 / (R * 0.6) + 1) / 2);
       qx.beginPath();
       qx.moveTo(cx, cy);
       qx.lineTo(cx + vx2, cy + vy2);
-      qx.strokeStyle = `rgba(167,139,250,${a2 * 2.0})`;
-      qx.lineWidth   = 1.2;
+      qx.strokeStyle = `rgba(167,139,250,${a2})`;
+      qx.lineWidth   = 1.6;
       qx.stroke();
 
       /* ── orbiting dot on equator ── */
       const ex  = cx + R * Math.cos(qt * 0.8);
       const ey  = cy + R * 0.28 * Math.sin(qt * 0.8);
       const edp = Math.sin(qt * 0.8);
-      const eg  = qx.createRadialGradient(ex, ey, 0, ex, ey, 5);
-      eg.addColorStop(0, `rgba(45,212,191,${0.5 + 0.3 * edp})`);
+      const eg  = qx.createRadialGradient(ex, ey, 0, ex, ey, 6);
+      eg.addColorStop(0, `rgba(45,212,191,${0.80 + 0.2 * edp})`);
       eg.addColorStop(1, 'rgba(45,212,191,0)');
       qx.fillStyle = eg;
       qx.beginPath();
@@ -1216,17 +1215,17 @@
       const mx  = cx + R * 0.28 * Math.cos(qt * 0.6 + 1.2);
       const my  = cy + R * Math.sin(qt * 0.6 + 1.2);
       const mg  = qx.createRadialGradient(mx, my, 0, mx, my, 4);
-      mg.addColorStop(0, 'rgba(167,139,250,0.55)');
+      mg.addColorStop(0, 'rgba(167,139,250,0.90)');
       mg.addColorStop(1, 'rgba(167,139,250,0)');
       qx.fillStyle = mg;
       qx.beginPath();
-      qx.arc(mx, my, 4, 0, Math.PI * 2);
+      qx.arc(mx, my, 5, 0, Math.PI * 2);
       qx.fill();
 
       /* ── centre dot ── */
       qx.beginPath();
-      qx.arc(cx, cy, 3.5, 0, Math.PI * 2);
-      qx.fillStyle = 'rgba(45,212,191,0.35)';
+      qx.arc(cx, cy, 4.5, 0, Math.PI * 2);
+      qx.fillStyle = 'rgba(45,212,191,0.80)';
       qx.fill();
 
       qt += 0.013;
