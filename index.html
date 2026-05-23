@@ -3,272 +3,1071 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dr. Raman Khurana | Staff ML Researcher at Northwestern University </title>
+  <title>Dr. Raman Khurana | AI Researcher · Physicist · Quantum ML</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* ── VARIABLES ── */
+    :root {
+      /* Light body theme */
+      --bg:        #f4f6fb;
+      --surface:   #ffffff;
+      --surface2:  #edf0f8;
+      --border:    rgba(15,23,42,0.09);
+      --shadow:    0 2px 16px rgba(15,23,42,0.08);
+      --shadow-lg: 0 8px 40px rgba(15,23,42,0.12);
+      --text:      #0f1923;
+      --muted:     #56687f;
+
+      /* Domain colours — tuned for light backgrounds */
+      --ai:          #0d9488;
+      --hep:         #7c3aed;
+      --quantum:     #b45309;
+      --ai-dim:      rgba(13,148,136,0.09);
+      --hep-dim:     rgba(124,58,237,0.09);
+      --quantum-dim: rgba(180,83,9,0.09);
+
+      /* Hero (dark slate) */
+      --hero-bg:      #0f172a;
+      --hero-text:    #e8f0fe;
+      --hero-muted:   #94a3b8;
+      --hero-ai:      #2dd4bf;
+      --hero-hep:     #a78bfa;
+      --hero-qml:     #fbbf24;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      background: #fdfdfd;
-      color: #333;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
     }
-    header {
-      background: linear-gradient(135deg, #12372A, #436850);
-      color: #fff;
-      padding: 3rem 1rem;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      text-align: left;
-    }
-    .hero-text {
-      max-width: 500px;
-    }
-    header img {
-      height: 260px; /* Adjust this value as needed */
-      width: auto;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid white;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-    header h1 {
-      margin: 0.5rem 0 0.2rem;
-      font-size: 2.4rem;
-    }
-    header p {
-      margin: 0.2rem 0;
-      font-weight: 300;
-      font-size: 1.1rem;
-    }
-    .connect-button {
-      margin-top: 1rem;
-      display: inline-block;
-      padding: 0.6rem 1.2rem;
-      background-color: #2D9596;
-      color: white;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
-    .connect-button:hover {
-      background-color: #227a7b;
-    }
+    h1,h2,h3,h4 { font-family:'Space Grotesk',sans-serif; }
+    a { color: var(--ai); text-decoration:none; }
+
+    /* ── NAV ── */
     nav {
-      background: #ECECEC;
-      text-align: center;
-      padding: 1rem 0;
+      position: fixed; top:0; left:0; right:0; z-index:200;
+      display: flex; align-items:center; justify-content:space-between;
+      padding: .75rem 2.5rem;
+      background: rgba(15,23,42,0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      transition: background .35s, border-color .35s, box-shadow .35s;
     }
-    nav a {
-      color: #12372A;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: bold;
+    nav.scrolled {
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 20px rgba(15,23,42,.08);
     }
-    section {
-      padding: 2rem;
-      max-width: 900px;
-      margin: auto;
+    .nav-brand {
+      font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1rem;
+      color: #e8f0fe; transition: color .35s; letter-spacing:.01em;
     }
-    h2 {
-      color: #12372A;
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 0.3rem;
+    nav.scrolled .nav-brand { color: var(--text); }
+    .nav-links { display:flex; gap:1.5rem; list-style:none; }
+    .nav-links a {
+      color: rgba(232,240,254,.65); font-size:.82rem; font-weight:500;
+      letter-spacing:.03em; transition: color .2s;
     }
-    .project, .experience {
-      margin-bottom: 2rem;
+    nav.scrolled .nav-links a { color: var(--muted); }
+    .nav-links a:hover,
+    nav.scrolled .nav-links a:hover { color: var(--ai); }
+    .nav-links a.active { color: var(--hero-ai); }
+    nav.scrolled .nav-links a.active { color: var(--ai); }
+    .mob-btn {
+      display:none; background:none; border:none; color:#e8f0fe;
+      font-size:1.4rem; cursor:pointer; transition:color .35s;
     }
-    
+    nav.scrolled .mob-btn { color: var(--text); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a 0%, #1e2d4a 55%, #12243d 100%);
+      display: flex; align-items:center; justify-content:center;
+      padding: 7rem 2rem 5rem;
+      position: relative; overflow:hidden;
+    }
+    /* Subtle radial glow behind photo */
+    #hero::after {
+      content:'';
+      position:absolute; right:10%; top:50%; transform:translateY(-50%);
+      width:380px; height:380px; border-radius:50%;
+      background: radial-gradient(circle, rgba(45,212,191,.08) 0%, transparent 70%);
+      pointer-events:none;
+    }
+
+    .hero-inner {
+      position:relative; z-index:1;
+      max-width:1060px; width:100%;
+      display:flex; align-items:center; gap:5rem; flex-wrap:wrap; justify-content:center;
+    }
+    .hero-text { flex:1; min-width:280px; }
+
+    .hero-eyebrow {
+      display:inline-flex; align-items:center; gap:.5rem;
+      font-size:.72rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+      color: var(--hero-ai); margin-bottom:1.2rem;
+    }
+    .hero-eyebrow::before {
+      content:''; display:inline-block; width:22px; height:2px; background:currentColor; border-radius:2px;
+    }
+    .hero-text h1 {
+      font-size: clamp(2.6rem,5vw,3.8rem);
+      font-weight:700; line-height:1.08; color:var(--hero-text);
+      margin-bottom:.5rem;
+    }
+    .hero-text h1 em { font-style:normal; color:var(--hero-ai); }
+    .hero-role {
+      font-size:1.05rem; color:var(--hero-muted); font-weight:400;
+      margin-bottom:2rem; letter-spacing:.01em;
+    }
+
+    /* Domain pills */
+    .pills { display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:2.5rem; }
+    .pill {
+      padding:.28rem .9rem; border-radius:100px; font-size:.73rem;
+      font-weight:600; letter-spacing:.04em; border:1px solid;
+    }
+    .pill-ai  { color:var(--hero-ai);  border-color:rgba(45,212,191,.5);  background:rgba(45,212,191,.08); }
+    .pill-hep { color:var(--hero-hep); border-color:rgba(167,139,250,.5); background:rgba(167,139,250,.08); }
+    .pill-qml { color:var(--hero-qml); border-color:rgba(251,191,36,.5);  background:rgba(251,191,36,.08); }
+
+    /* Stats */
+    .hero-stats { display:flex; gap:2.5rem; flex-wrap:wrap; margin-bottom:2.5rem; }
+    .stat-v {
+      font-family:'Space Grotesk',sans-serif; font-size:2rem; font-weight:700;
+      color:var(--hero-text); line-height:1;
+    }
+    .stat-l { font-size:.7rem; color:var(--hero-muted); margin-top:.2rem; text-transform:uppercase; letter-spacing:.06em; }
+
+    /* CTAs */
+    .hero-cta { display:flex; gap:.75rem; flex-wrap:wrap; }
+    .btn {
+      padding:.65rem 1.4rem; border-radius:7px; font-size:.85rem;
+      font-weight:600; letter-spacing:.02em; transition:all .22s; display:inline-block;
+    }
+    .btn-primary { background:var(--hero-ai); color:#0f172a; }
+    .btn-primary:hover { filter:brightness(1.1); transform:translateY(-2px); box-shadow:0 8px 24px rgba(45,212,191,.25); }
+    .btn-ghost { border:1px solid rgba(255,255,255,.15); color:var(--hero-text); background:rgba(255,255,255,.05); }
+    .btn-ghost:hover { border-color:rgba(255,255,255,.3); background:rgba(255,255,255,.1); }
+
+    /* Photo */
+    .hero-photo { position:relative; flex-shrink:0; }
+    .photo-ring {
+      position:absolute; inset:-13px; border-radius:50%; z-index:0;
+      background: conic-gradient(var(--hero-ai), var(--hero-hep), var(--hero-qml), var(--hero-ai));
+      animation: spin 14s linear infinite;
+    }
+    .photo-mask { position:absolute; inset:-7px; border-radius:50%; background:var(--hero-bg); z-index:1; }
+    .hero-photo img {
+      position:relative; z-index:2;
+      width:220px; height:220px; border-radius:50%; object-fit:cover;
+      border:3px solid rgba(255,255,255,.1);
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    /* ── SHARED LAYOUT ── */
+    .wrap  { max-width:1060px; margin:auto; padding:5rem 2rem; }
+    .wrap-alt { background:var(--surface); }
+
+    .section-tag {
+      display:inline-block; font-size:.68rem; font-weight:700;
+      letter-spacing:.14em; text-transform:uppercase; color:var(--ai); margin-bottom:.5rem;
+    }
+    .section-head { margin-bottom:3rem; }
+    .section-head h2 { font-size:clamp(1.75rem,3vw,2.3rem); font-weight:700; line-height:1.2; }
+    .section-head p { color:var(--muted); margin-top:.4rem; font-size:.95rem; }
+
+    .stripe { background:var(--surface); }
+    .full-hr { border:none; height:1px; background:var(--border); }
+
+    /* ── THREE PILLARS ── */
+    .pillars-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(295px,1fr)); gap:1.5rem;
+    }
+    .p-card {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:14px; padding:2rem; position:relative; overflow:hidden;
+      transition:transform .3s, box-shadow .3s;
+      box-shadow: var(--shadow);
+    }
+    .p-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+    .pc-ai::before  { background:var(--ai); }
+    .pc-hep::before { background:var(--hep); }
+    .pc-qml::before { background:var(--quantum); }
+    .p-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); }
+    .p-icon { font-size:2.2rem; margin-bottom:1rem; }
+    .p-card h3 { font-size:1.15rem; font-weight:700; margin-bottom:.5rem; }
+    .pc-ai h3  { color:var(--ai); }
+    .pc-hep h3 { color:var(--hep); }
+    .pc-qml h3 { color:var(--quantum); }
+    .p-card p { color:var(--muted); font-size:.87rem; line-height:1.65; }
+    .p-tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:1.1rem; }
+    .p-tag { font-size:.68rem; padding:.2rem .55rem; border-radius:4px; font-weight:600; }
+    .pc-ai  .p-tag { background:var(--ai-dim);      color:var(--ai); }
+    .pc-hep .p-tag { background:var(--hep-dim);     color:var(--hep); }
+    .pc-qml .p-tag { background:var(--quantum-dim); color:var(--quantum); }
+
+    /* ── ABOUT ── */
+    .about-grid { display:grid; grid-template-columns:2fr 1fr; gap:3rem; align-items:start; }
+    .about-text p { color:var(--muted); margin-bottom:1rem; font-size:.94rem; line-height:1.75; }
+    .about-text p strong { color:var(--text); }
+    .qfacts {
+      background:var(--bg); border:1px solid var(--border);
+      border-radius:14px; padding:1.5rem; position:sticky; top:5.5rem;
+    }
+    .qfacts h4 {
+      font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--muted); margin-bottom:1.1rem;
+    }
+    .qf { display:flex; align-items:flex-start; gap:.65rem; margin-bottom:.9rem; }
+    .qf-ico { font-size:.95rem; flex-shrink:0; margin-top:.15rem; }
+    .qf-t { font-size:.83rem; color:var(--muted); line-height:1.45; }
+    .qf-t strong { color:var(--text); }
+
+    /* ── RESEARCH FILTER ── */
+    .fbar { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:2rem; }
+    .filt {
+      padding:.36rem 1rem; border-radius:100px; border:1px solid var(--border);
+      background:var(--surface); color:var(--muted); font-size:.79rem; font-weight:500;
+      cursor:pointer; transition:all .2s; font-family:'Inter',sans-serif;
+      box-shadow: 0 1px 4px rgba(15,23,42,.05);
+    }
+    .filt:hover { border-color:var(--muted); color:var(--text); }
+    .f-all { border-color:var(--text); color:var(--text); background:rgba(15,23,42,.05); }
+    .f-q   { border-color:var(--quantum); color:var(--quantum); background:var(--quantum-dim); }
+    .f-ai  { border-color:var(--ai);      color:var(--ai);      background:var(--ai-dim); }
+    .f-hep { border-color:var(--hep);     color:var(--hep);     background:var(--hep-dim); }
+
+    /* ── RESEARCH CARDS ── */
+    .r-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(315px,1fr)); gap:1.25rem; }
+    .r-card {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:12px; padding:1.4rem;
+      box-shadow:var(--shadow); transition:transform .2s, box-shadow .2s;
+    }
+    .r-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-lg); }
+    .r-top { display:flex; align-items:flex-start; justify-content:space-between; gap:.5rem; margin-bottom:.75rem; }
+    .db {
+      font-size:.61rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+      padding:.18rem .55rem; border-radius:4px; flex-shrink:0; white-space:nowrap;
+    }
+    .db-ai  { background:var(--ai-dim);      color:var(--ai); }
+    .db-hep { background:var(--hep-dim);     color:var(--hep); }
+    .db-qml { background:var(--quantum-dim); color:var(--quantum); }
+    .sb { font-size:.61rem; padding:.18rem .55rem; border-radius:4px; font-weight:600; white-space:nowrap; }
+    .s-sub  { background:#eff6ff; color:#2563eb; }
+    .s-pub  { background:#f0fdf4; color:#16a34a; }
+    .s-wip  { background:#fffbeb; color:#d97706; }
+    .s-live { background:#f0fdfa; color:var(--ai); }
+    .r-card h3 { font-size:.94rem; font-weight:600; line-height:1.45; margin-bottom:.5rem; color:var(--text); }
+    .r-card p  { font-size:.82rem; color:var(--muted); line-height:1.55; }
+    .r-metric  { margin-top:.7rem; font-size:.77rem; font-weight:700; }
+    .r-card[data-d="ai"]     .r-metric { color:var(--ai); }
+    .r-card[data-d="hep"]    .r-metric { color:var(--hep); }
+    .r-card[data-d="quantum"].r-metric { color:var(--quantum); }
+
+    /* ── VIDEO ── */
+    .video-wrap {
+      border-radius:14px; overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+    }
+    .video-wrap video { width:100%; display:block; }
+
+    /* ── TIMELINE ── */
+    .timeline { position:relative; padding-left:2.5rem; }
+    .timeline::before {
+      content:''; position:absolute; left:.55rem; top:.3rem; bottom:0; width:2px;
+      background: linear-gradient(to bottom, var(--ai), var(--hep), var(--hep));
+      border-radius:2px;
+    }
+    .t-item { position:relative; margin-bottom:3rem; }
+    .t-dot {
+      position:absolute; left:-2.25rem; top:.4rem;
+      width:12px; height:12px; border-radius:50%; border:2px solid;
+    }
+    .td-nw   { border-color:var(--ai);  background:var(--ai-dim); }
+    .td-cern { border-color:var(--hep); background:var(--hep-dim); }
+    .t-meta  { display:flex; align-items:center; flex-wrap:wrap; gap:.6rem; margin-bottom:.4rem; }
+    .t-date  { font-size:.74rem; font-weight:600; color:var(--muted); letter-spacing:.03em; }
+    .t-org   { font-size:.72rem; font-weight:700; padding:.15rem .5rem; border-radius:4px; }
+    .org-nw   { background:var(--ai-dim);  color:var(--ai); }
+    .org-cern { background:var(--hep-dim); color:var(--hep); }
+    .t-item h3 { font-size:1.08rem; font-weight:700; margin-bottom:.25rem; }
+    .t-sub { font-size:.83rem; color:var(--muted); margin-bottom:.75rem; }
+    .t-ul  { list-style:none; }
+    .t-ul li {
+      font-size:.83rem; color:var(--muted); padding:.28rem 0 .28rem 1.2rem;
+      position:relative; line-height:1.55;
+    }
+    .ul-nw   li::before { content:'▸'; position:absolute; left:0; top:.35rem; color:var(--ai);  font-size:.7rem; }
+    .ul-cern li::before { content:'▸'; position:absolute; left:0; top:.35rem; color:var(--hep); font-size:.7rem; }
+    .t-ul li strong { color:var(--text); }
+
+    /* ── SKILLS ── */
+    .sk-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1rem; }
+    .sk-g {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:10px; padding:1.2rem; box-shadow:var(--shadow);
+    }
+    .sk-lbl {
+      font-size:.67rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--muted); margin-bottom:.75rem; display:flex; align-items:center; gap:.45rem;
+    }
+    .sd { display:inline-block; width:6px; height:6px; border-radius:50%; }
+    .sd-ai  { background:var(--ai); }
+    .sd-hep { background:var(--hep); }
+    .sd-qml { background:var(--quantum); }
+    .sd-n   { background:var(--muted); }
+    .sk-tags { display:flex; flex-wrap:wrap; gap:.35rem; }
+    .sk-tag {
+      background:var(--bg); border:1px solid var(--border);
+      color:var(--text); font-size:.72rem; padding:.2rem .55rem; border-radius:4px; font-weight:500;
+    }
+
+    /* ── AWARDS ── */
+    .aw-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(265px,1fr)); gap:1.25rem; }
+    .aw-card {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:14px; padding:1.65rem; transition:transform .2s, box-shadow .2s;
+      box-shadow: var(--shadow);
+    }
+    .aw-card.star {
+      border-color:rgba(180,83,9,.25);
+      background:linear-gradient(140deg,#fff,rgba(180,83,9,.04));
+    }
+    .aw-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-lg); }
+    .aw-ico { font-size:1.9rem; margin-bottom:.7rem; }
+    .aw-card h3 { font-size:.94rem; font-weight:700; margin-bottom:.3rem; line-height:1.35; }
+    .aw-yr  { font-size:.72rem; color:var(--muted); margin-bottom:.55rem; }
+    .aw-card p { font-size:.82rem; color:var(--muted); line-height:1.55; }
+
+    /* ── PUBLICATIONS ── */
+    .pub-list { display:flex; flex-direction:column; gap:.9rem; }
+    .pub-card {
+      background:var(--surface); border:1px solid var(--border); border-radius:10px;
+      padding:1.2rem 1.4rem; display:flex; align-items:flex-start; gap:1.2rem;
+      box-shadow:var(--shadow); transition:box-shadow .2s;
+    }
+    .pub-card:hover { box-shadow:var(--shadow-lg); }
+    .pub-yr {
+      font-family:'Space Grotesk',sans-serif; font-size:1.3rem; font-weight:700;
+      color:var(--muted); min-width:3rem; text-align:right; line-height:1; padding-top:.2rem;
+    }
+    .pub-body { flex:1; }
+    .pub-body h4 { font-size:.91rem; font-weight:600; margin-bottom:.28rem; line-height:1.45; color:var(--text); }
+    .pub-venue { font-size:.77rem; color:var(--muted); margin-bottom:.38rem; }
+    .pub-tags { display:flex; gap:.4rem; flex-wrap:wrap; }
+
+    /* ── TEACHING / EDUCATION CARDS ── */
+    .tc {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:12px; padding:1.6rem; margin-bottom:1.1rem;
+      box-shadow:var(--shadow);
+    }
+    .tc h3 { font-size:.97rem; font-weight:700; margin-bottom:.22rem; }
+    .tc-meta { font-size:.76rem; color:var(--muted); margin-bottom:.6rem; }
+    .tc p { font-size:.85rem; color:var(--muted); line-height:1.65; }
+    .tc p strong { color:var(--text); }
+
+    /* ── CONTACT ── */
+    .c-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1rem; }
+    .c-card {
+      background:var(--surface); border:1px solid var(--border); border-radius:10px;
+      padding:1.2rem; display:flex; align-items:center; gap:.75rem;
+      color:var(--text); box-shadow:var(--shadow); transition:all .2s;
+    }
+    .c-card:hover { border-color:var(--ai); transform:translateY(-2px); box-shadow:var(--shadow-lg); }
+    .c-ico { font-size:1.4rem; }
+    .c-card h4 { font-size:.8rem; font-weight:600; margin-bottom:.08rem; }
+    .c-card span { font-size:.72rem; color:var(--muted); }
+
+    /* ── FOOTER ── */
     footer {
-      text-align: center;
-      padding: 1.5rem;
-      background: #12372A;
-      color: #fff;
-      margin-top: 3rem; 
+      background:#0f172a; color:#64748b;
+      text-align:center; padding:2.5rem 2rem; font-size:.8rem;
     }
-    a {
-      color: #2D9596;
+    footer strong { color:#2dd4bf; }
+
+    /* ── SCROLL FADE ── */
+    .fu { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+    .fu.vis { opacity:1; transform:translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:900px) {
+      .about-grid { grid-template-columns:1fr; }
+      .qfacts { position:static; }
     }
-
-
-
-
-
-    /* Blinking / pulsing opportunity text */
-.blinking-opportunity {
-  margin-top: 0.8rem;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #FFD966; /* warm highlight, readable on dark header */
-  animation: pulse 1.8s infinite;
-}
-
-.blinking-opportunity span {
-  color: #E0F2F1; /* soft contrast, not harsh */
-}
-
-/* Subtle academic pulse (not aggressive blink) */
-@keyframes pulse {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-    
+    @media (max-width:680px) {
+      nav { padding:.75rem 1.25rem; }
+      .nav-links { display:none; flex-direction:column; position:fixed; top:53px; left:0; right:0;
+        background:rgba(15,23,42,.97); padding:1.5rem; gap:1rem;
+        border-bottom:1px solid rgba(255,255,255,.06); }
+      .nav-links.open { display:flex; }
+      .mob-btn { display:block; }
+      .hero-photo img { width:175px; height:175px; }
+      .hero-text h1 { font-size:2.2rem; }
+      .hero-stats { gap:1.5rem; }
+      .stat-v { font-size:1.75rem; }
+      .wrap { padding:3.5rem 1.25rem; }
+      #hero { padding:6rem 1.25rem 4rem; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <img src="IMG_0844.jpg" alt="Dr. Raman Khurana">
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <span class="nav-brand">Dr. Raman Khurana</span>
+  <button class="mob-btn" id="mob-btn">☰</button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#pillars">Research Areas</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-inner">
+
+    <!-- Text -->
     <div class="hero-text">
-      <h1>Dr. Raman Khurana</h1>
-      <p>Staff Researcher | Lecturer | Computational Physicist </p>
-      <p> <strong>Northwestern University</strong></p>
-      <p>Illinois, USA</p>
+      <span class="hero-eyebrow">Northwestern University · Evanston, IL</span>
 
-      <!-- Blinking opportunity text -->
-      <p class="blinking-opportunity">
-      🚀 Open for opportunities at the intersection of
-      <span>Experimental High Energy Physics</span>,
-      <span>Quantum Computing</span>, 
-      <span>Machine Learning and Data Science</span>,
-    </p>
-      
-      <p>
-        <a href="mailto:ramankhurana1986@gmail.com">Email</a> |
-        <a href="https://github.com/ramankhurana">GitHub</a> |
-        <a href="https://www.linkedin.com/in/dr-raman-khurana-21b4497a/">LinkedIn</a>
-      </p>
+      <h1>Dr. Raman<br><em>Khurana</em></h1>
+      <p class="hero-role">AI Researcher &nbsp;·&nbsp; Computational Physicist &nbsp;·&nbsp; Quantum ML Scientist</p>
+
+      <div class="pills">
+        <span class="pill pill-ai">AI / ML / GenAI</span>
+        <span class="pill pill-qml">Quantum Computing</span>
+        <span class="pill pill-hep">HEP · CERN · Big Data</span>
+      </div>
+
+      <div class="hero-stats">
+        <div>
+          <div class="stat-v" data-count="15" data-suffix="+">0+</div>
+          <div class="stat-l">Years Experience</div>
+        </div>
+        <div>
+          <div class="stat-v" data-count="10" data-suffix=" PB">0</div>
+          <div class="stat-l">Data Processed</div>
+        </div>
+        <div>
+          <div class="stat-v" data-count="20" data-suffix="+">0+</div>
+          <div class="stat-l">Int'l Conferences</div>
+        </div>
+        <div>
+          <div class="stat-v" data-count="26" data-suffix="+">0+</div>
+          <div class="stat-l">Students Mentored</div>
+        </div>
+      </div>
+
+      <div class="hero-cta">
+        <a href="https://www.linkedin.com/in/dr-raman-khurana-21b4497a/" class="btn btn-primary" target="_blank">Connect on LinkedIn</a>
+        <a href="#research" class="btn btn-ghost">View Research</a>
+        <a href="mailto:ramankhurana1986@gmail.com" class="btn btn-ghost">Get in Touch</a>
+      </div>
     </div>
-  </header>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#awards">Awards</a>
-    <a href="#interest">Research Interests</a>
-    <a href="#research"> Research </a>
-    <a href="#projects">Engineering Projects</a>
-    <a href="#experience">Experience</a>
-    <a href="#publications">Selected Publications</a>
-    <a href="#publications">Selected Publications</a>
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
-  </nav>
+    <!-- Photo -->
+    <div class="hero-photo">
+      <div class="photo-ring"></div>
+      <div class="photo-mask"></div>
+      <img src="IMG_0844.jpg" alt="Dr. Raman Khurana">
+    </div>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p> I am Machine Learning Researcher at Department of Electrical and Computer Engineering, Northwestern University. </p> 
-    <p> My research interest lies in the synergy between Quantum Computing and Machine Learning. I focus on developing quantum-native AI algorithms to solve high-dimensional problems, while simultaneously leveraging classical deep learning to correct quantum measurement and optimize hardware performance. </p>
-    
-    </section>
-
-    <section id="research">
-    <h2>Current Research</h2>
-   <ul>
-        <li><strong>Quantum Machine Learning for Time Series:</strong> Forecasting using hybrid QML architectures.</li>
-        <li><strong>Quantum State Tomography:</strong> State reconstruction via Neural Networks and Transfer Learning.</li>
-        <li><strong>Spatio-Temporal Signal Correction:</strong> Real-time AI-based correction of quantum signals.</li>
-        <li><strong>Quantum-Native Forecasting:</strong> Developing new models using native quantum algorithms.</li>
-        <li><strong>VQC Benchmarking:</strong> Evaluating gradient sensitivity and performance on diverse quantum hardware.</li>
-    </ul>
-    </section>
-
-    <section id="awards">
-    <h2>Awards</h2>
-    <p> Received an awarded of 500,000 GPU/CPU compute hours from Northwestern University to perform quantum machine learning simulations and development of new ML models for quantum communication. </p>
-    <p> I was awarded with Breakthrough Price in Physics 2025 "Oscar of Science" for the unprecedent contribution towards the discovery and measurement of Higgs boson properties. </p>
-    <p> I was awarded with Ramanujan fellowship by SERB to conduct the search for dark matter and enhancing the discovery potential using advanced machine learning. </p>
-    </section>
-
-    <section id="interest">
-    <p> My research interests lie at the intersection of Artificial Intelligence and Quantum Computing. I believe there is significant potential for synergy between these two fields to achieve long-term technological goals.  </p>
-    
-    
-    sequence modeling, with strong emphasis on time series forecasting and the interpretability of large language models. I am particularly interested in:</p>
-    <ul>
-      <li>Neural network-based architectures for time series forecasting</li>
-      <li>Automated feature engineering using physics-inspired mathematical formulations</li>
-      <li>Understanding the internal dynamics and behavior of large language models.</li>
-
-    </ul>
-
-      <p>Before joining Northwestern University, I spent over a decade at CERN, where I lead many new particle searches and contributed significantly to algorithm development. My PhD was focused on the search for Higgs boson and contributed to the discovery of the Higgs boson and development and optimization of hadronic tau reconstruction algorithm (Hadron Plus Strip).  I hold a Ph.D. in Experimental High Energy Physics, which provided me with a strong foundation in large-scale data analysis and equipped me to develop first-line responses for identifying and handling spurious data samples.</p>
-
-
-
-    <p> I am passionate about teaching. At Northwestern, I instruct foundational machine learning course (MLDS-400) in the Machine Learning and Data Science (MLDS) graduate program, integrating core theoretical principles of exploratory data analysis and machine learning along with hands on project with real world datasets.</p>
-  </section>
-
-  <section id="demo">
-  <h2>Video Demo: Multi-Agent AI Data Scientist</h2>
-  <p>This project demonstrates a multi-agent system built using open-source LLMs, where each agent plays a specialized role in a typical data science pipeline—ranging from ingestion to summarization, insights generation, and visualization. The system mimics a collaborative team of data scientists, significantly reducing the time needed for data analysis.</p>
-
-  <video 
-    src="demo.mov" 
-    autoplay 
-    loop 
-    muted 
-    playsinline 
-    style="width: 100%; border: 3px solid #2D9596; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); background: #f0f0f0;">
-    Your browser does not support the video tag.
-  </video>
+  </div>
 </section>
 
-  
-  <section id="projects">
-    <h2>Highlighted Projects</h2>
-    <div class="project">
-      <h3>Agentic AI for Data Science Automation</h3>
-      <p>Built multi-agent systems using small open-source LLMs for autonomous EDA, feature engineering, and visualization.</p>
+<!-- ── THREE PILLARS ── -->
+<section id="pillars" class="stripe">
+  <div class="wrap">
+    <div class="section-head fu">
+      <span class="section-tag">Research Identity</span>
+      <h2>Three Domains. One Vision.</h2>
+      <p>Bridging experimental particle physics, modern AI systems, and quantum computing to solve frontier problems.</p>
     </div>
-    <div class="project">
-      <h3>Time Series Forecasting with Static Covariates</h3>
-      <p>Improved transformer-based models by integrating metadata, achieving 6% higher accuracy on Divvy and Walmart datasets.</p>
+    <div class="pillars-grid">
+      <div class="p-card pc-ai fu">
+        <div class="p-icon">🤖</div>
+        <h3>AI / ML / GenAI</h3>
+        <p>Designing scalable GenAI systems, fine-tuning LLMs (LoRA/QLoRA), building RAG pipelines, and multi-agent architectures for Fortune 500 clients. Physics-inspired feature engineering for time series — submitted to NeurIPS 2026.</p>
+        <div class="p-tags">
+          <span class="p-tag">LangChain</span><span class="p-tag">LangGraph</span><span class="p-tag">RAG</span>
+          <span class="p-tag">LoRA / QLoRA</span><span class="p-tag">AutoGen</span><span class="p-tag">CrewAI</span>
+          <span class="p-tag">Time Series</span><span class="p-tag">MCP / A2A</span>
+        </div>
+      </div>
+      <div class="p-card pc-qml fu">
+        <div class="p-icon">💡</div>
+        <h3>AI for Quantum Computing</h3>
+        <p>Neural networks for quantum state tomography (10× speedup), AI-driven polarization control for quantum fiber communication (95–99% fidelity), and benchmarking VQCs on NISQ hardware via gradient analysis.</p>
+        <div class="p-tags">
+          <span class="p-tag">Qiskit</span><span class="p-tag">Pennylane</span><span class="p-tag">qBraid</span>
+          <span class="p-tag">QST</span><span class="p-tag">VQC</span><span class="p-tag">NISQ</span>
+          <span class="p-tag">Transfer Learning</span>
+        </div>
+      </div>
+      <div class="p-card pc-hep fu">
+        <div class="p-icon">⚛️</div>
+        <h3>HEP · CERN · Big Data</h3>
+        <p>7 years on the CMS Experiment at CERN. Led Higgs boson searches, four dark matter analyses (monoHbb, monoH combination, MET scanning &amp; reconstruction), hadronic tau reconstruction (HPS), and 10 PB pipelines.</p>
+        <div class="p-tags">
+          <span class="p-tag">Higgs Boson</span><span class="p-tag">Dark Matter</span>
+          <span class="p-tag">Tau Reco (HPS)</span><span class="p-tag">10 PB Pipelines</span>
+          <span class="p-tag">BDT</span><span class="p-tag">ROOT / C++</span><span class="p-tag">MET Reco</span>
+        </div>
+      </div>
     </div>
-    <div class="project">
-      <h3>Physics-Inspired Feature Engineering</h3>
-      <p>Created dynamic features for high-frequency data using fluid dynamics theory, outperforming baseline models by over 10%.</p>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <section id="experience">
-    <h2>Academic Experience</h2>
-    <div class="experience">
-      <h3>Lecturer, MLDS Program – Northwestern University</h3>
-      <p>Designed and taught foundational ML course with projects on real-world data. Supervised wildfire prediction and time series projects.</p>
+<!-- ── ABOUT ── -->
+<hr class="full-hr">
+<div class="wrap" id="about">
+  <div class="section-head fu">
+    <span class="section-tag">About</span>
+    <h2>Physicist Turned AI Researcher</h2>
+  </div>
+  <div class="about-grid fu">
+    <div class="about-text">
+      <p>I am an <strong>AI Researcher (Staff Scientist)</strong> at Northwestern University's Department of Electrical &amp; Computer Engineering, with a PhD in Experimental High Energy Physics and <strong>15+ years of experience</strong> in machine learning, statistical modeling, and large-scale data analysis.</p>
+      <p>My work spans three interconnected frontiers: <strong>modern AI and GenAI systems</strong> — LLM fine-tuning, RAG, and multi-agent architectures for Fortune 500 clients; <strong>experimental particle physics</strong> — processing 10 petabytes of proton-proton collision data at CERN; and <strong>AI for quantum computing</strong> — neural approaches to quantum state reconstruction, signal correction, and hardware benchmarking.</p>
+      <p>Before Northwestern, I spent <strong>7 years at CERN</strong> as a postdoctoral researcher. I led four dark matter searches and orchestrated the mono-Higgs combination across five global teams (20 senior scientists), producing the <strong>world's best upper limit</strong> on dark matter production cross-section.</p>
+      <p>My PhD contributed directly to the <strong>discovery of the Higgs boson</strong>. I developed a novel analysis strategy published in JHEP and was the <strong>first Indian PhD student to independently lead a CMS analysis</strong> from inception to publication at CERN.</p>
+      <p>I teach <strong>"Everything Starts with Data"</strong> (MLDS-400) in Northwestern's graduate ML &amp; Data Science program and have mentored 6 PhD students and 20+ undergraduate and master's students.</p>
     </div>
-    <div class="experience">
-      <h3>Researcher – CERN & Northwestern</h3>
-      <p>Led ML-driven dark matter search at CERN. Developed forecasting and automation models at Northwestern’s Center for Deep Learning.</p>
+    <aside class="qfacts">
+      <h4>Quick Facts</h4>
+      <div class="qf"><span class="qf-ico">🏆</span><div class="qf-t"><strong>Breakthrough Prize 2025</strong> — "The Oscars of Science"</div></div>
+      <div class="qf"><span class="qf-ico">🔬</span><div class="qf-t"><strong>Ramanujan Fellowship</strong> — $150K grant (SERB, 2021)</div></div>
+      <div class="qf"><span class="qf-ico">💻</span><div class="qf-t"><strong>500K GPU/CPU hours</strong> for quantum ML research</div></div>
+      <div class="qf"><span class="qf-ico">⚛️</span><div class="qf-t">CMS Collaboration — <strong>Higgs boson discovery</strong> (2012)</div></div>
+      <div class="qf"><span class="qf-ico">🌍</span><div class="qf-t"><strong>20+ international conferences</strong></div></div>
+      <div class="qf"><span class="qf-ico">📝</span><div class="qf-t">Referee: <strong>JHEP · DSJ · ICLR</strong></div></div>
+      <div class="qf"><span class="qf-ico">⚖️</span><div class="qf-t">Judge — <strong>DataFest 2025</strong>, Am. Statistical Association</div></div>
+      <div class="qf"><span class="qf-ico">🇨🇭</span><div class="qf-t"><strong>18 months onsite at CERN</strong> — 6× extended for extraordinary performance</div></div>
+    </aside>
+  </div>
+</div>
+
+<!-- ── RESEARCH PROJECTS ── -->
+<hr class="full-hr">
+<div class="wrap stripe" id="research" style="background:var(--bg)">
+  <div class="section-head fu">
+    <span class="section-tag">Research &amp; Projects</span>
+    <h2>Selected Work</h2>
+    <p>Filter by domain. Spanning quantum ML, GenAI systems, and particle physics.</p>
+  </div>
+  <div class="fbar fu">
+    <button class="filt f-all" data-f="all">All</button>
+    <button class="filt" data-f="quantum">Quantum ML</button>
+    <button class="filt" data-f="ai">AI / ML / GenAI</button>
+    <button class="filt" data-f="hep">HEP · CERN</button>
+  </div>
+  <div class="r-grid">
+
+    <div class="r-card fu" data-d="quantum">
+      <div class="r-top"><span class="db db-qml">Quantum ML</span><span class="sb s-sub">Submitted · Frontiers in Optics</span></div>
+      <h3>Automated Quantum State Tomography via Neural Networks &amp; Transfer Learning</h3>
+      <p>NN architecture trained on synthetic data with transfer learning to expedite QST in realistic lab environments — far faster than maximum likelihood estimation.</p>
+      <div class="r-metric">↑ 10× speedup over MLE baseline</div>
     </div>
-  </section>
 
-  <section id="education">
-    <h2>Education</h2>
-    <p><strong>PhD, High Energy Physics</strong> – University of Calcutta / Saha Institute</p>
-    <p><strong>MSc, Physics (Electronics)</strong> – University of Delhi</p>
-    <p><strong>BSc, Physics (Hons)</strong> – University of Delhi</p>
-  </section>
+    <div class="r-card fu" data-d="quantum">
+      <div class="r-top"><span class="db db-qml">Quantum ML</span><span class="sb s-sub">Submitted · Frontiers in Optics</span></div>
+      <h3>AI-Driven Polarization Control for Quantum Fiber Communication</h3>
+      <p>State-space model that tracks and corrects quantum signals using a classical reference + time series modeling on synthetic and real fiber data. No direct quantum measurement required.</p>
+      <div class="r-metric">95–99% fidelity correction</div>
+    </div>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:ramankhurana1986@gmail.com">ramankhurana1986@gmail.com</a></p>
-    <p>GitHub: <a href="https://github.com/ramankhurana">github.com/ramankhurana</a></p>
-  </section>
+    <div class="r-card fu" data-d="quantum">
+      <div class="r-top"><span class="db db-qml">Quantum ML</span><span class="sb s-wip">Preprint in Progress</span></div>
+      <h3>Characterization of NISQ Hardware via Gradient Analysis of VQCs</h3>
+      <p>Benchmarking superconducting backends for variational quantum circuits across devices and circuit depths. Quantifies gradient stability as a proxy for trainability on near-term hardware.</p>
+      <div class="r-metric">VQC learnability across multiple hardware platforms</div>
+    </div>
 
-  <footer>
-    <p>© 2025 Raman Khurana</p>
-  </footer>
+    <div class="r-card fu" data-d="ai">
+      <div class="r-top"><span class="db db-ai">AI / ML</span><span class="sb s-sub">Submitted · NeurIPS 2026</span></div>
+      <h3>Physics-Inspired Automated Feature Engineering via Navier–Stokes Decomposition</h3>
+      <p>Automated feature engineering that projects time series into a high-dimensional space using fluid-dynamics mathematics (NS decomposition) to capture complex temporal dynamics.</p>
+      <div class="r-metric">↑ 20% over TSFuse &amp; Catch22 baselines</div>
+    </div>
+
+    <div class="r-card fu" data-d="ai">
+      <div class="r-top"><span class="db db-ai">AI / ML · Time Series</span><span class="sb s-wip">Draft in Preparation</span></div>
+      <h3>Enhancing Transformer Forecasting with Static Covariates</h3>
+      <p>Extended Autoformer, Fedformer, and DLinear to handle heterogeneous data (static + temporal covariates). Multiple integration strategies designed and evaluated. Insights shared with Allstate.</p>
+      <div class="r-metric">↑ 6% forecast accuracy</div>
+    </div>
+
+    <div class="r-card fu" data-d="ai">
+      <div class="r-top"><span class="db db-ai">GenAI · Agentic</span><span class="sb s-live">Deployed</span></div>
+      <h3>Agentic AI for Real-Time Marketing Data Analytics</h3>
+      <p>Multi-agent system (AutoGen + open-source LLMs) that translates natural language into real-time analytics workflows. Agents handle ingestion, summarization, code generation, and visualization.</p>
+      <div class="r-metric">90%+ accuracy · 60–80% reduction in analytics response time</div>
+    </div>
+
+    <div class="r-card fu" data-d="ai">
+      <div class="r-top"><span class="db db-ai">GenAI · NLP · SQL</span><span class="sb s-live">Deployed</span></div>
+      <h3>Text-to-SQL Platform for Enterprise Airline Data</h3>
+      <p>Led a team of 4 master's students. Fine-tuned Gemini for NL-to-SQL over enterprise databases with strategic cost and latency reduction.</p>
+      <div class="r-metric">30% → 85% query accuracy · 50–80% cost reduction</div>
+    </div>
+
+    <div class="r-card fu" data-d="ai">
+      <div class="r-top"><span class="db db-ai">GenAI · RAG</span><span class="sb s-live">Deployed</span></div>
+      <h3>Insurance Document Intelligence Assistant</h3>
+      <p>RAG-based assistant with PII guardrails, toxicity filtering, hallucination detection (DeepEval, AgentEval), and LLM-as-judge evaluation for a Fortune 500 insurance client.</p>
+      <div class="r-metric">70–90% time savings · 85%+ accuracy</div>
+    </div>
+
+    <div class="r-card fu" data-d="hep">
+      <div class="r-top"><span class="db db-hep">HEP · Dark Matter</span><span class="sb s-pub">Published · CMS</span></div>
+      <h3>Mono-Higgs Dark Matter Combination (monoH)</h3>
+      <p>Orchestrated combination of five mono-Higgs analyses across five global teams (20 senior scientists). Unified heterogeneous datasets and statistical models into a single framework.</p>
+      <div class="r-metric">World's best upper limit on DM production cross-section</div>
+    </div>
+
+    <div class="r-card fu" data-d="hep">
+      <div class="r-top"><span class="db db-hep">HEP · Dark Matter</span><span class="sb s-pub">Published · CMS</span></div>
+      <h3>Dark Matter: monoHbb · MET Scanning · MET Reconstruction</h3>
+      <p>Led four DM search projects. ML-driven signal-background discrimination on highly imbalanced 10 PB datasets. Novel analysis category boosted exclusion limits by 20%.</p>
+      <div class="r-metric">↑ 20% exclusion limit · 4 publications</div>
+    </div>
+
+    <div class="r-card fu" data-d="hep">
+      <div class="r-top"><span class="db db-hep">HEP · Reconstruction</span><span class="sb s-pub">Published · ICHEP 2012</span></div>
+      <h3>Hadronic Tau Reconstruction — HPS Algorithm</h3>
+      <p>Developed and optimized a multivariate algorithm (Hadron Plus Strip) for detecting hadronic tau decays in CMS proton-proton collision events. Presented at ICHEP 2012, Melbourne.</p>
+      <div class="r-metric">&gt;60% accuracy · ↑ 20% efficiency over prior methods</div>
+    </div>
+
+    <div class="r-card fu" data-d="hep">
+      <div class="r-top"><span class="db db-hep">HEP · PhD Thesis</span><span class="sb s-pub">Published · JHEP</span></div>
+      <h3>Higgs Boson Search in Uncovered Phase Space</h3>
+      <p>Novel analysis strategy for the Higgs boson search using multivariate methods. First Indian PhD to independently lead a CMS analysis from inception to publication.</p>
+      <div class="r-metric">Published in JHEP · 4 international conferences</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── VIDEO DEMO ── -->
+<hr class="full-hr">
+<div class="wrap stripe" id="demo">
+  <div class="section-head fu">
+    <span class="section-tag">Live Demo</span>
+    <h2>Multi-Agent AI Data Scientist</h2>
+    <p>Open-source LLMs autonomously driving a full data science pipeline — from ingestion to insights to visualization.</p>
+  </div>
+  <div class="video-wrap fu">
+    <video src="demo.mov" autoplay loop muted playsinline></video>
+  </div>
+</div>
+
+<!-- ── EXPERIENCE ── -->
+<hr class="full-hr">
+<div class="wrap" id="experience" style="background:var(--bg)">
+  <div class="section-head fu">
+    <span class="section-tag">Experience</span>
+    <h2>Career Timeline</h2>
+  </div>
+  <div class="timeline fu">
+
+    <div class="t-item">
+      <div class="t-dot td-nw"></div>
+      <div class="t-meta">
+        <span class="t-date">Sept 2022 — Present</span>
+        <span class="t-org org-nw">Northwestern University</span>
+      </div>
+      <h3>ML Researcher — Staff Scientist / Research Associate</h3>
+      <p class="t-sub">Dept. of Electrical &amp; Computer Engineering · Evanston, IL</p>
+      <ul class="t-ul ul-nw">
+        <li>Quantum ML research: automated QST (<strong>10× speedup</strong>), AI polarization control (<strong>95–99% fidelity</strong>), and NISQ benchmarking via gradient analysis.</li>
+        <li>Physics-inspired time series feature engineering via Navier–Stokes decomposition — submitted to NeurIPS 2026 (<strong>20% improvement</strong> over SOTA).</li>
+        <li>Deployed multi-agent GenAI systems for Fortune 500 clients achieving <strong>60–90% time savings</strong> at 85–90% accuracy using LangGraph, AutoGen, and open-source LLMs.</li>
+        <li>Advising on GenAI adoption: LLM safety, RAG pipelines, hallucination detection, and evaluation frameworks.</li>
+        <li>Instructor for MLDS-400 "Everything Starts with Data" — curriculum designed for <strong>55 students</strong>.</li>
+        <li>Awarded <strong>500K GPU/CPU compute hours</strong> for quantum ML simulation.</li>
+      </ul>
+    </div>
+
+    <div class="t-item">
+      <div class="t-dot td-cern"></div>
+      <div class="t-meta">
+        <span class="t-date">March 2015 — Aug 2022</span>
+        <span class="t-org org-cern">CERN · CMS Experiment</span>
+      </div>
+      <h3>Postdoctoral Researcher</h3>
+      <p class="t-sub">Florida State University, USA &amp; National Central University, Taiwan</p>
+      <ul class="t-ul ul-cern">
+        <li>Led four dark matter searches (monoHbb, mono-H combination, MET scanning, MET reconstruction) to publication in international journals.</li>
+        <li>Orchestrated mono-Higgs combination across <strong>5 global teams (20 senior scientists)</strong> — <strong>world's best upper limit</strong> on DM production cross-section.</li>
+        <li>Engineered Python pipelines for <strong>10 PB</strong> of proton-proton collision data; <strong>10× processing speedup</strong> via NumPy vectorization.</li>
+        <li>BDT for jet discrimination (<strong>10% sensitivity gain</strong>), jet energy regression (<strong>10% resolution improvement</strong>), HPS tau algorithm (<strong>20% efficiency gain</strong>).</li>
+        <li>GEANT4 simulation for HGCAL detector — <strong>5–20% energy resolution gain</strong>. Real-time outlier detection reducing spurious events by <strong>10–25%</strong>.</li>
+        <li>Educator at CMS Data Analysis School, Fermilab (2020). Awarded <strong>Ramanujan Fellowship</strong>, $150K (SERB, 2021).</li>
+      </ul>
+    </div>
+
+    <div class="t-item">
+      <div class="t-dot td-cern"></div>
+      <div class="t-meta">
+        <span class="t-date">Aug 2009 — March 2015</span>
+        <span class="t-org org-cern">CERN · CMS Experiment</span>
+      </div>
+      <h3>PhD Researcher</h3>
+      <p class="t-sub">Saha Institute of Nuclear Physics · University of Calcutta · CERN, Geneva</p>
+      <ul class="t-ul ul-cern">
+        <li>Novel analysis strategy for Higgs boson search in uncovered phase space — published in JHEP.</li>
+        <li>Contributed to the <strong>discovery of the Higgs boson</strong> (2012) as a CMS collaboration member.</li>
+        <li><strong>First Indian PhD</strong> to independently lead a CMS analysis from inception to international publication.</li>
+        <li>Awarded <strong>18 months onsite at CERN</strong> across 6 three-month extensions for extraordinary performance.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── SKILLS ── -->
+<hr class="full-hr">
+<div class="wrap stripe" id="skills">
+  <div class="section-head fu">
+    <span class="section-tag">Technical Skills</span>
+    <h2>Stack &amp; Tooling</h2>
+  </div>
+  <div class="sk-grid fu">
+    <div class="sk-g">
+      <div class="sk-lbl"><span class="sd sd-ai"></span>GenAI Stack</div>
+      <div class="sk-tags">
+        <span class="sk-tag">LangChain</span><span class="sk-tag">Ollama</span>
+        <span class="sk-tag">OpenAI API</span><span class="sk-tag">Transformers</span>
+        <span class="sk-tag">HuggingFace</span><span class="sk-tag">PEFT</span>
+        <span class="sk-tag">LoRA</span><span class="sk-tag">QLoRA</span>
+      </div>
+    </div>
+    <div class="sk-g">
+      <div class="sk-lbl"><span class="sd sd-ai"></span>Agentic AI</div>
+      <div class="sk-tags">
+        <span class="sk-tag">LangGraph</span><span class="sk-tag">AutoGen</span>
+        <span class="sk-tag">Phidata</span><span class="sk-tag">CrewAI</span>
+        <span class="sk-tag">MCP</span><span class="sk-tag">A2A</span>
+      </div>
+    </div>
+    <div class="sk-g">
+      <div class="sk-lbl"><span class="sd sd-qml"></span>Quantum Computing</div>
+      <div class="sk-tags">
+        <span class="sk-tag">Qiskit</span><span class="sk-tag">Pennylane</span><span class="sk-tag">qBraid</span>
+      </div>
+    </div>
+    <div class="sk-g">
+      <div class="sk-lbl"><span class="sd sd-ai"></span>Machine Learning / AI</div>
+      <div class="sk-tags">
+        <span class="sk-tag">PyTorch</span><span class="sk-tag">Scikit-learn</span>
+        <span class="sk-tag">XGBoost</span><span class="sk-tag">NumPy</span>
+        <span class="sk-tag">Pandas</span><span class="sk-tag">StatsModels</span><span class="sk-tag">NLTK</span>
+      </div>
+    </div>
+    <div class="sk-g">
+      <div class="sk-lbl"><span class="sd sd-n"></span>Big Data</div>
+      <div class="sk-tags">
+        <span class="sk-tag">PySpark</span><span class="sk-tag">PyFlink</span>
+        <span class="sk-tag">Kafka</span><span class="sk-tag">PostgreSQL</span>
+        <span class="sk-tag">Cassandra</span><span class="sk-tag">MinIO</span>
+      </div>
+    </div>
+    <div class="sk-g">
+      <div class="sk-lbl"><span class="sd sd-n"></span>Languages</div>
+      <div class="sk-tags">
+        <span class="sk-tag">Python</span><span class="sk-tag">C++</span>
+        <span class="sk-tag">C</span><span class="sk-tag">SQL</span>
+      </div>
+    </div>
+    <div class="sk-g">
+      <div class="sk-lbl"><span class="sd sd-n"></span>Deployment</div>
+      <div class="sk-tags">
+        <span class="sk-tag">Docker</span><span class="sk-tag">Kubernetes</span>
+        <span class="sk-tag">AWS</span><span class="sk-tag">CI/CD</span><span class="sk-tag">GitHub</span>
+      </div>
+    </div>
+    <div class="sk-g">
+      <div class="sk-lbl"><span class="sd sd-hep"></span>HEP &amp; Visualization</div>
+      <div class="sk-tags">
+        <span class="sk-tag">ROOT</span><span class="sk-tag">GEANT4</span>
+        <span class="sk-tag">Matplotlib</span><span class="sk-tag">Seaborn</span>
+        <span class="sk-tag">Tableau</span><span class="sk-tag">Grafana</span><span class="sk-tag">LaTeX</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── AWARDS ── -->
+<hr class="full-hr">
+<div class="wrap" id="awards" style="background:var(--bg)">
+  <div class="section-head fu">
+    <span class="section-tag">Recognition</span>
+    <h2>Awards &amp; Fellowships</h2>
+  </div>
+  <div class="aw-grid fu">
+    <div class="aw-card star">
+      <div class="aw-ico">🏆</div>
+      <h3>Breakthrough Prize in Fundamental Science</h3>
+      <div class="aw-yr">2025 · "The Oscars of Science"</div>
+      <p>Awarded for unprecedented contributions to the discovery and precision measurement of Higgs boson properties as a member of the CMS collaboration at CERN.</p>
+    </div>
+    <div class="aw-card">
+      <div class="aw-ico">🔬</div>
+      <h3>Ramanujan Fellowship</h3>
+      <div class="aw-yr">2021 · SERB · $150K Research Grant</div>
+      <p>Prestigious national fellowship to carry out a dark matter search program and CMS detector upgrade contributions.</p>
+    </div>
+    <div class="aw-card">
+      <div class="aw-ico">💻</div>
+      <h3>500K GPU/CPU Compute Hours</h3>
+      <div class="aw-yr">Northwestern University</div>
+      <p>Awarded for quantum machine learning simulation and development of new ML models for quantum communication research.</p>
+    </div>
+    <div class="aw-card">
+      <div class="aw-ico">⚖️</div>
+      <h3>Judge — DataFest 2025</h3>
+      <div class="aw-yr">2025 · American Statistical Association</div>
+      <p>Selected as a national judge for the DataFest data science competition by the American Statistical Association.</p>
+    </div>
+    <div class="aw-card">
+      <div class="aw-ico">📋</div>
+      <h3>Peer Reviewer</h3>
+      <div class="aw-yr">Ongoing</div>
+      <p>Active referee for the Journal of High Energy Physics (JHEP), Data Science Journal (DSJ), and ICLR (session: AI4DiffEqtnsInSci).</p>
+    </div>
+    <div class="aw-card">
+      <div class="aw-ico">🇨🇭</div>
+      <h3>18 Months Onsite at CERN</h3>
+      <div class="aw-yr">2009–2015 · Geneva, Switzerland</div>
+      <p>Granted six consecutive 3-month extensions at CERN for extraordinary scientific performance — a rare distinction during PhD.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── PUBLICATIONS ── -->
+<hr class="full-hr">
+<div class="wrap stripe" id="publications">
+  <div class="section-head fu">
+    <span class="section-tag">Publications</span>
+    <h2>Selected Publications</h2>
+    <p>For the complete list, visit <a href="https://scholar.google.com" target="_blank">Google Scholar</a>.</p>
+  </div>
+  <div class="pub-list fu">
+
+    <div class="pub-card">
+      <div class="pub-yr">2026</div>
+      <div class="pub-body">
+        <h4>Automated Time Series Feature Generation via Profiling Frame and Navier–Stokes Decomposition</h4>
+        <div class="pub-venue">NeurIPS 2026 (submitted)</div>
+        <div class="pub-tags"><span class="db db-ai">AI / ML</span><span class="sb s-sub">Submitted</span></div>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-yr">2025</div>
+      <div class="pub-body">
+        <h4>Automated Quantum State Tomography via Neural Networks and Transfer Learning</h4>
+        <div class="pub-venue">Frontiers in Optics (submitted)</div>
+        <div class="pub-tags"><span class="db db-qml">Quantum ML</span><span class="sb s-sub">Submitted</span></div>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-yr">2025</div>
+      <div class="pub-body">
+        <h4>AI-Driven Polarization Control for Quantum Fiber Communication Networks</h4>
+        <div class="pub-venue">Frontiers in Optics (submitted)</div>
+        <div class="pub-tags"><span class="db db-qml">Quantum ML</span><span class="sb s-sub">Submitted</span></div>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-yr">2022</div>
+      <div class="pub-body">
+        <h4>Search for new physics in events with a Higgs boson and missing transverse momentum — mono-Higgs combination and monoHbb channel</h4>
+        <div class="pub-venue">CMS Collaboration · Physical Review D / JHEP</div>
+        <div class="pub-tags"><span class="db db-hep">HEP · CMS</span><span class="sb s-pub">Published</span></div>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-yr">2015</div>
+      <div class="pub-body">
+        <h4>Development of a Novel Analysis Strategy to Search for Higgs Boson in an Uncovered Phase Space</h4>
+        <div class="pub-venue">Journal of High Energy Physics (JHEP) · CMS Collaboration</div>
+        <div class="pub-tags"><span class="db db-hep">HEP · PhD</span><span class="sb s-pub">Published</span></div>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-yr">2012</div>
+      <div class="pub-body">
+        <h4>Performance of the CMS Hadronic Tau Reconstruction (HPS) Algorithm in Proton-Proton Collisions</h4>
+        <div class="pub-venue">ICHEP 2012, Melbourne · CMS Collaboration</div>
+        <div class="pub-tags"><span class="db db-hep">HEP · Reco</span><span class="sb s-pub">Published</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── TEACHING ── -->
+<hr class="full-hr">
+<div class="wrap" id="teaching" style="background:var(--bg)">
+  <div class="section-head fu">
+    <span class="section-tag">Teaching &amp; Mentoring</span>
+    <h2>Education Impact</h2>
+  </div>
+  <div class="fu">
+    <div class="tc">
+      <h3>Instructor — "Everything Starts with Data" (MLDS-400)</h3>
+      <div class="tc-meta">Northwestern University · Master in Machine Learning &amp; Data Science · In Person</div>
+      <p>Designed and delivered full curriculum for <strong>55 students</strong> with diverse academic backgrounds. Topics: data categorization, EDA, the ML lifecycle, feature engineering, tree models, SVMs, clustering, and optimization — with hands-on real-world projects.</p>
+    </div>
+    <div class="tc">
+      <h3>Educator — CMS Data Analysis School</h3>
+      <div class="tc-meta">Fermilab, IL, USA · 2020</div>
+      <p>Taught best practices in data science and machine learning to undergraduate and PhD students at the CMS flagship analysis school at Fermilab.</p>
+    </div>
+    <div class="tc">
+      <h3>Research Mentorship</h3>
+      <div class="tc-meta">Northwestern University &amp; CERN · 2015 – Present</div>
+      <p>Mentored and supervised <strong>6 PhD students</strong> and <strong>20+ undergraduate and master's students</strong> on projects spanning wildfire prediction, time series forecasting, and agentic AI systems.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── EDUCATION ── -->
+<hr class="full-hr">
+<div class="wrap stripe" id="education">
+  <div class="section-head fu">
+    <span class="section-tag">Education</span>
+    <h2>Academic Background</h2>
+  </div>
+  <div class="fu">
+    <div class="tc">
+      <h3>PhD — Experimental High Energy Physics</h3>
+      <div class="tc-meta">Saha Institute of Nuclear Physics, Kolkata · University of Calcutta · CERN, Geneva &nbsp;|&nbsp; Aug 2009 – March 2015</div>
+      <p>Dissertation: <em>Development of a Novel Analysis Strategy to Search for Higgs Boson in an Uncovered Phase Space.</em> Contributed to the discovery of the Higgs boson. First Indian PhD to independently lead a CMS analysis from inception to publication (JHEP). Awarded 18 months onsite at CERN. Presented at four international conferences.</p>
+    </div>
+    <div class="tc">
+      <h3>MSc — Physics (Electronics)</h3>
+      <div class="tc-meta">University of Delhi</div>
+    </div>
+    <div class="tc">
+      <h3>BSc — Physics (Honours)</h3>
+      <div class="tc-meta">University of Delhi</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CONTACT ── -->
+<hr class="full-hr">
+<div class="wrap" id="contact" style="background:var(--bg)">
+  <div class="section-head fu">
+    <span class="section-tag">Contact</span>
+    <h2>Get in Touch</h2>
+    <p>Open to research collaborations, consulting engagements, and speaking opportunities.</p>
+  </div>
+  <div class="c-grid fu">
+    <a href="mailto:ramankhurana1986@gmail.com" class="c-card">
+      <span class="c-ico">📧</span>
+      <div><h4>Email</h4><span>ramankhurana1986@gmail.com</span></div>
+    </a>
+    <a href="https://www.linkedin.com/in/dr-raman-khurana-21b4497a/" class="c-card" target="_blank">
+      <span class="c-ico">💼</span>
+      <div><h4>LinkedIn</h4><span>dr-raman-khurana</span></div>
+    </a>
+    <a href="https://github.com/ramankhurana" class="c-card" target="_blank">
+      <span class="c-ico">🐙</span>
+      <div><h4>GitHub</h4><span>github.com/ramankhurana</span></div>
+    </a>
+    <a href="https://scholar.google.com" class="c-card" target="_blank">
+      <span class="c-ico">📖</span>
+      <div><h4>Google Scholar</h4><span>Publication record</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2026 <strong>Dr. Raman Khurana</strong> &nbsp;·&nbsp; Northwestern University · Evanston, IL</p>
+  <p style="margin-top:.3rem; font-size:.73rem;">AI &nbsp;·&nbsp; High Energy Physics &nbsp;·&nbsp; Quantum Computing</p>
+</footer>
+
+<script>
+  /* ── MOBILE NAV ── */
+  document.getElementById('mob-btn').addEventListener('click', () => {
+    document.getElementById('nav-links').classList.toggle('open');
+  });
+
+  /* ── NAV SCROLL TRANSITION ── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive:true });
+
+  /* ── COUNTER ANIMATION ── */
+  function runCounter(el) {
+    const target = parseInt(el.dataset.count, 10);
+    const suffix = el.dataset.suffix || '+';
+    let cur = 0;
+    const step = Math.max(1, target / 52);
+    const t = setInterval(() => {
+      cur += step;
+      if (cur >= target) { cur = target; clearInterval(t); }
+      el.textContent = Math.floor(cur) + suffix;
+    }, 26);
+  }
+  const cObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { runCounter(e.target); cObs.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
+
+  /* ── SCROLL FADE-IN ── */
+  const fObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); fObs.unobserve(e.target); } });
+  }, { threshold: 0.07, rootMargin: '0px 0px -36px 0px' });
+  document.querySelectorAll('.fu').forEach(el => fObs.observe(el));
+
+  /* ── RESEARCH FILTER ── */
+  const filterBtns = document.querySelectorAll('.filt');
+  const rCards = document.querySelectorAll('.r-card');
+  const classMap = { all:'f-all', quantum:'f-q', ai:'f-ai', hep:'f-hep' };
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const f = btn.dataset.f;
+      filterBtns.forEach(b => b.className = 'filt');
+      btn.classList.add('filt', classMap[f]);
+      rCards.forEach(c => { c.style.display = (f === 'all' || c.dataset.d === f) ? '' : 'none'; });
+    });
+  });
+
+  /* ── ACTIVE NAV ── */
+  const sections = document.querySelectorAll('[id]');
+  const navAs = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
+    navAs.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + cur); });
+  }, { passive:true });
+</script>
 </body>
 </html>
