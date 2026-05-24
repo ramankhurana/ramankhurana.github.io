@@ -1095,10 +1095,10 @@
     function drawBloch() {
       qx.clearRect(0, 0, qc.width, qc.height);
 
-      /* centre the sphere roughly behind the text column */
-      const cx = Math.min(qc.width * 0.30, 340);
+      /* sit the sphere behind the photo on the right side */
+      const cx = qc.width * 0.76;
       const cy = qc.height * 0.50;
-      const R  = Math.min(qc.width * 0.17, qc.height * 0.36, 165);
+      const R  = Math.min(qc.width * 0.14, qc.height * 0.32, 148);
 
       /* ── outer sphere ring ── */
       qx.beginPath();
