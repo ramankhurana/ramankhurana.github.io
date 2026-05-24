@@ -91,10 +91,10 @@
       padding: 7rem 2rem 5rem;
       position: relative; overflow:hidden;
     }
-    /* Qubit canvas */
+    /* Qubit canvas — lives inside .hero-photo, floats on top of the image */
     #qubit-canvas {
-      position:absolute; inset:0; z-index:0;
-      width:100%; height:100%; pointer-events:none;
+      position:absolute; inset:-80px; z-index:3;
+      pointer-events:none;
     }
 
     .hero-inner {
@@ -447,7 +447,6 @@
 
 <!-- ── HERO ── -->
 <section id="hero">
-  <canvas id="qubit-canvas"></canvas>
   <div class="hero-inner">
 
     <!-- Text -->
@@ -496,6 +495,7 @@
 
     <!-- Photo -->
     <div class="hero-photo">
+      <canvas id="qubit-canvas"></canvas>
       <div class="photo-ring"></div>
       <div class="photo-mask"></div>
       <img src="IMG_0844.jpg" alt="Dr. Raman Khurana">
@@ -1095,10 +1095,10 @@
     function drawBloch() {
       qx.clearRect(0, 0, qc.width, qc.height);
 
-      /* sit the sphere behind the photo on the right side */
-      const cx = qc.width * 0.76;
-      const cy = qc.height * 0.50;
-      const R  = Math.min(qc.width * 0.14, qc.height * 0.32, 148);
+      /* centred on the canvas, which is centred on the photo */
+      const cx = qc.width  / 2;
+      const cy = qc.height / 2;
+      const R  = Math.min(qc.width, qc.height) * 0.36;
 
       /* ── outer sphere ring ── */
       qx.beginPath();
