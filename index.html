@@ -91,10 +91,17 @@
       padding: 7rem 2rem 5rem;
       position: relative; overflow:hidden;
     }
-    /* Qubit canvas — lives inside .hero-photo, floats on top of the image */
+    /* Qubit canvas — floats between text and photo in the hero gap */
     #qubit-canvas {
-      position:absolute; inset:-80px; z-index:3;
+      flex-shrink:0;
+      width:160px; height:160px;
+      align-self:center;
       pointer-events:none;
+      display:block;
+      opacity:0.88;
+    }
+    @media (max-width:960px) {
+      #qubit-canvas { display:none; }
     }
 
     .hero-inner {
@@ -493,9 +500,11 @@
       </div>
     </div>
 
+    <!-- Qubit sphere — floats in the gap between text and photo -->
+    <canvas id="qubit-canvas"></canvas>
+
     <!-- Photo -->
     <div class="hero-photo">
-      <canvas id="qubit-canvas"></canvas>
       <div class="photo-ring"></div>
       <div class="photo-mask"></div>
       <img src="IMG_0844.jpg" alt="Dr. Raman Khurana">
